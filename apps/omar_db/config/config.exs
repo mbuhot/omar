@@ -4,16 +4,19 @@ use Mix.Config
 
 config :omar_db, ecto_repos: [Omar.Db.Repo]
 
-database =
+db_opts =
   case Mix.env() do
-    :dev -> "omar_dev"
-    :test -> "omar_test"
-    :prod -> "omar"
+    :dev -> [database: "omar_dev"]
+    :test -> [database: "omar_test", pool: Ecto.Adapters.SQL.Sandbox]
+    :prod -> [database: "omar"]
   end
 
 config :omar_db, Omar.Db.Repo,
-  database: database,
-  username: "postgres",
-  password: "postgres",
-  hostname: "localhost",
-  port: "5432"
+  db_opts ++
+  [
+    username: "postgres",
+    password: "postgres",
+    hostname: "localhost",
+    port: "5432",
+    migration_primary_key: [name: :id, type: :binary_id]
+  ]

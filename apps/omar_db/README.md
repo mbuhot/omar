@@ -7,4 +7,3 @@ It provides a Repo module which acts as a shared connection pool that can be use
 ## TODO
 
  - Supply the DB connection string via runtime configuration
- - Support Ecto Sandboxing the DB while testing other apps
