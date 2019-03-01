@@ -10,3 +10,18 @@ use Mix.Config
 # apps, should be configured in the umbrella to avoid confusion.
 import_config "../apps/*/config/config.exs"
 
+config :logger, :console,
+  format: "$time $metadata[$level] $message\n",
+  metadata: [:request_id]
+
+config :phoenix, :json_library, Jason
+
+case Mix.env() do
+  :dev ->
+    config :phoenix, :plug_init_mode, :runtime
+  :test ->
+    config :logger, level: :warn
+  :prod ->
+    config :logger, level: :info
+end
+

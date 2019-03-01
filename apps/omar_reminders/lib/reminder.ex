@@ -1,5 +1,6 @@
 defmodule Omar.Reminders.Reminder do
   use Ecto.Schema
+  alias Ecto.Changeset
 
   @schema_prefix :omar_reminders
   @primary_key {:id, :binary_id, autogenerate: true}
@@ -19,13 +20,13 @@ defmodule Omar.Reminders.Reminder do
     updated_at: DateTime.t
   }
 
-  @spec create(Enumerable.t()) :: {:ok, t} | {:error, Ecto.Changeset.t()}
+  @spec create(Enumerable.t()) :: {:ok, t} | {:error, Changeset.t()}
   def create (params) do
     changeset =
       %__MODULE__{}
-      |> Ecto.Changeset.cast(Map.new(params), [:title, :scheduled_for])
-      |> Ecto.Changeset.validate_length(:title, max: 256)
-      |> Ecto.Changeset.validate_required([:title, :scheduled_for])
+      |> Changeset.cast(Map.new(params), [:title, :scheduled_for])
+      |> Changeset.validate_length(:title, max: 256)
+      |> Changeset.validate_required([:title, :scheduled_for])
 
     if changeset.valid? do
       {:ok, Ecto.Changeset.apply_changes(changeset)}
