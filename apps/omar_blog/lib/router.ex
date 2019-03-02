@@ -19,6 +19,7 @@ defmodule Omar.Blog.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    resources "/posts", PostController
     get "/*rest", PageController, :redirect_to_index
   end
 end

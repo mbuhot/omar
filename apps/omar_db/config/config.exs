@@ -11,12 +11,14 @@ db_opts =
     :prod -> [database: "omar"]
   end
 
-config :omar_db, Omar.Db.Repo,
-  db_opts ++
-  [
-    username: "postgres",
-    password: "postgres",
-    hostname: "localhost",
-    port: "5432",
-    migration_primary_key: [name: :id, type: :binary_id]
-  ]
+config :omar_db,
+       Omar.Db.Repo,
+       db_opts ++
+         [
+           username: "postgres",
+           password: "postgres",
+           hostname: "localhost",
+           port: "5432",
+           migration_primary_key: [name: :id, type: :binary_id],
+           migration_timestamps: [type: :utc_datetime_usec]
+         ]

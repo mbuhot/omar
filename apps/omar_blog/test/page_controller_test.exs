@@ -1,5 +1,5 @@
 defmodule Omar.Blog.PageControllerTest do
-  use Omar.Blog.ConnCase
+  use Omar.Blog.ConnCase, async: true
 
   test "GET /blog/", %{conn: conn} do
     conn = get(conn, "/blog/")
